@@ -68,3 +68,83 @@ O SLA é um contrato que define níveis mínimos de disponibilidade, desempenho 
 
 
 ---
+
+## 🏗️ Componentes de Arquitetura do Azure
+
+### 🌍 Região (Region)  
+- **Definição**: Conjunto de data centers geograficamente próximos, geralmente 3 por região.  
+- **Alta disponibilidade**: Data centers replicam e sincronizam dados entre si. Se um DC falhar, os demais continuam operando (mesmo que com desempenho reduzido).  
+- **Responsabilidade do provedor**: O Azure “possui” o recurso físico; você “possui” os dados. O provedor garante conformidade com normas como a LGPD.
+
+### 🔄 Pares de Região (Paired Regions)  
+- **Objetivo**: Recuperação de desastres quando uma região inteira fica indisponível.  
+- **Características**:  
+  - Região secundária automática para fail‑over.  
+  - Nem sempre oferece o conjunto completo de serviços da região primária, mas supre o essencial.
+
+### 🛡️ Regiões Soberanas (Sovereign Regions)  
+- **Uso**: Atendem requisitos legais ou governamentais específicos.  
+- **Exemplos**:  
+  - Azure Government (EUA, para uso militar e agências governamentais).  
+  - Azure China (operado pela 21Vianet, conforme legislação chinesa).
+
+---
+
+### 🏢 Zona de Disponibilidade (Availability Zone)  
+- **Definição**: Agrupamento de vários data centers isolados dentro de uma mesma região.  
+- **Objetivo**:  
+  - Isolamento físico de falhas — se um DC em uma zona cair, VMs em outra zona continuam ativas.  
+  - Garantir continuidade de serviço e reduzir pontos únicos de falha.
+
+### 🔧 Conjuntos de Disponibilidade (Availability Sets)  
+- **Fault Domains (Domínios de Falha)**  
+  - VMs distribuídas em racks físicos distintos.  
+  - Protege contra falhas de hardware ou falta de energia em um único rack.  
+- **Update Domains (Domínios de Atualização)**  
+  - VMs agrupadas para atualizações sequenciais.  
+  - Evita downtime simultâneo durante manutenção da plataforma Azure.
+
+## 📌 Responsabilidades de Availability Set vs. Availability Zone
+
+| Recurso            | Protege contra falha de…   | Nível de isolamento  | Escopo de cobertura         |
+|--------------------|----------------------------|----------------------|-----------------------------|
+| Availability Set   | Rack (Fault Domain)        | Dentro de uma zona   | VMs em racks distintos      |
+| Availability Zone  | Zona inteira (data centers) | Entre zonas da região | Zonas geograficamente isoladas |
+
+---
+
+
+### 📦 Grupo de Recursos (Resource Group)  
+- **Função**: Contêiner lógico para organizar recursos (VMs, Storage Accounts, redes, etc.).  
+- **Regras**:  
+  - Cada recurso pertence a um único grupo.  
+  - Recursos podem ser movidos entre grupos.  
+  - Grupos **não** podem ser renomeados.  
+  - Recursos dentro de um grupo podem estar em regiões diferentes.
+
+### 🔑 Assinaturas (Subscriptions)  
+- **Modelo**: Uma conta Azure pode ter múltiplas assinaturas; cada assinatura está vinculada a uma única conta.  
+- **Uso**:  
+  - Separa faturamento e limites de serviço.  
+  - Permite delegar acesso e controlar gastos por projeto ou equipe.
+
+### 🗂️ Grupos de Gerenciamento (Management Groups)  
+- **Objetivo**: Aplicar políticas, RBAC e compliance de forma hierárquica sobre múltiplas assinaturas.  
+- **Hierarquia**: Para aplicar políticas e RBAC sobre múltiplas subscriptions.  
+
+---
+
+## ☁️ Termos e Componentes na Azure e Equivalentes em Outros Provedores
+
+| Conceito Azure              | AWS                                         | GCP                                          |
+|-----------------------------|---------------------------------------------|----------------------------------------------|
+| Região (Region)             | Region                                      | Region                                       |
+| Zona de Disponibilidade     | Availability Zone (AZ)                      | Zone                                         |
+| Resource Group              | Tags / Projects¹                            | Project / Folder                             |
+| Subscription                | Account / AWS Organizations                 | Project                                      |
+| Management Group            | AWS Organizations / Organizational Units     | Organization / Folder                        |
+| Paired Regions              | Region Pair                                 | — (via multi‑region replication)             |
+| Sovereign Regions           | AWS GovCloud / China Regions                | — (Cloud China via parceiros)                |
+| Availability Set            | Placement Group                             | — (políticas de instâncias semelhantes)      |
+
+
