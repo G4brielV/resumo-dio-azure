@@ -142,9 +142,120 @@ O SLA é um contrato que define níveis mínimos de disponibilidade, desempenho 
 | Zona de Disponibilidade     | Availability Zone (AZ)                      | Zone                                         |
 | Resource Group              | Tags / Projects¹                            | Project / Folder                             |
 | Subscription                | Account / AWS Organizations                 | Project                                      |
-| Management Group            | AWS Organizations / Organizational Units     | Organization / Folder                        |
+| Management Group            | AWS Organizations / Organizational Units     | Organization / Folder                       |
 | Paired Regions              | Region Pair                                 | — (via multi‑region replication)             |
 | Sovereign Regions           | AWS GovCloud / China Regions                | — (Cloud China via parceiros)                |
 | Availability Set            | Placement Group                             | — (políticas de instâncias semelhantes)      |
+
+
+## 🖥️ Máquinas Virtuais (VMs)
+
+### 💻 VMs (IaaS)  
+Emulação completa de um computador físico na nuvem, incluindo CPU, memória, armazenamento e interfaces de rede.  
+- **Uso**: lift‑and‑shift de aplicações legadas, teste de SOs, ambientes isolados.  
+- **Vantagem**: controle total do sistema operacional e software instalado.  
+
+### 🧩 Conjuntos de Dimensionamento de VMs (VM Scale Sets)  
+Gerenciam grupos de VMs idênticas com escalonamento automático baseado em métricas de uso.  
+- **Balanceamento de carga** automático entre instâncias.  
+- **Escalabilidade horizontal**: adiciona/remove VMs conforme demanda.  
+
+### 🏗️ Conjuntos de Disponibilidade de VMs (Availability Sets)  
+Agrupam VMs semelhantes e as distribuem em racks físicos isolados dentro de um data center para maximizar disponibilidade.  
+- **Domínios de Falha (Fault Domains)**  
+  - Racks físicos distintos.  
+  - Evitam indisponibilidade por falhas de hardware ou energia em um rack específico.
+
+- **Domínios de Atualização (Update Domains)**  
+  - Grupos de VMs que podem ser reiniciadas simultaneamente durante atualizações do Azure.  
+  - Garante que atualizações de manutenção não impactem todas as instâncias ao mesmo tempo.
+    
+> ![Availability Set Illustration](https://github.com/user-attachments/assets/b6893718-f8e0-4dd0-b781-b3f2082df1a6)
+
+
+---
+
+## 🧑‍💻 Área de Trabalho Virtual (DaaS)
+
+### 🌐 Azure Virtual Desktop (DaaS)  
+Desktop completo (SO, apps, dados) entregue pela nuvem e acessado remotamente.  
+- **Benefícios**:  
+  - Gerenciamento centralizado e segurança (MFA, políticas de acesso).  
+  - Redução de risco de dados em endpoints.  
+  - Provisionamento dinâmico de desktops.  
+- **Modelos**:  
+  - **Multissessão**: vários usuários em uma mesma VM Windows.  
+  - **VMs dedicadas**: cada usuário com sua própria VM.  
+
+### 🔍 Diferença: VMs vs. Área de Trabalho Virtual  
+
+- 📦 **Máquina Virtual (VM)**: é como alugar um galpão vazio. Você escolhe o que vai colocar lá: máquinas, móveis, servidores, etc. É flexível, mas você precisa configurar tudo.
+- 🖥️ **Área de Trabalho Virtual**: é como alugar um escritório já mobiliado. Você entra, liga o computador e já começa a trabalhar — tudo pronto, acessível de qualquer lugar.
+
+#### Resumo:
+| Característica       | VM (Máquina Virtual)          | Área de Trabalho Virtual               |
+|----------------------|-------------------------------|----------------------------------------|
+| **Foco**             | Infraestrutura e servidores   | Experiência do usuário (desktop remoto) |
+| **Configuração**     | Você instala e configura tudo | Já vem com ambiente de trabalho pronto |
+| **Público-alvo**     | Admins, desenvolvedores       | Funcionários, equipes remotas          |
+| **Acesso**           | Mais técnico e indireto       | Interface gráfica pronta para uso      |
+
+---
+
+## 🐳 Contêineres no Azure 
+Ambiente leve que executa aplicações empacotadas sem gerenciar o SO completo. Responde rapidamente a demandas variáveis.
+
+### ⚙️ Instâncias de Contêiner (Container Instances – PaaS)  
+Executa um contêiner ou pod sob demanda, sem necessidade de orquestração.
+
+### 🔄 Aplicativos de Contêiner (Container Apps – PaaS)  
+- **Balanceamento de carga** automático entre instâncias de contêiner.  
+- **Escalabilidade** horizontal automática conforme métricas (CPU, fila, HTTP).  
+
+### 🧠 AKS – Azure Kubernetes Service  
+Plataforma gerenciada de Kubernetes para orquestrar contêineres em produção.  
+- Automatiza deploy, escalonamento, monitoramento e atualizações de clusters.  
+
+---
+
+## ⚡ Azure Functions
+
+### 🔧 Azure Functions (PaaS)  
+Execução de código “serverless” acionado por eventos (HTTP, mensagens, timers).  
+- **Cobra** por execução e tempo de execução.  
+- Ideal para pequenas tarefas, pipelines de dados e automações event‑driven.  
+
+---
+
+## 🌐 Serviços de Aplicativos
+
+### 🌍 App Service (PaaS)  
+Hospedagem gerenciada de aplicações Web, APIs e mobile back‑ends.  
+- **Recursos**:  
+  - Deploy contínuo (Git, CI/CD).  
+  - Slots de staging.  
+  - SSL/TLS integrado.  
+  - Autenticação/Autorização built‑in.  
+
+---
+
+## 🌐 Redes no Azure
+
+### 🔌 Rede Virtual (VNet)  
+Rede isolada onde recursos Azure se comunicam.  
+- VNets não se conectam por padrão; use peering, VPN ou ExpressRoute.
+
+### 🔐 Gateway de VPN  
+Cria túneis IPsec/IKE entre VNet e rede on‑premises pela Internet pública.
+
+### 🚄 ExpressRoute  
+Conexão privada (cabo dedicado) entre datacenter local e Azure, sem passar pela Internet pública.
+
+### 🌍 DNS do Azure  
+Serviço DNS gerenciado para:  
+- Domínios públicos e privados.  
+- Resolução de nomes dentro de VNets.  
+- Zonas DNS customizadas e políticas de tráfego.
+
 
 
