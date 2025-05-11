@@ -258,4 +258,49 @@ Serviço DNS gerenciado para:
 - Zonas DNS customizadas e políticas de tráfego.
 
 
+## 🔐 Serviços de Diretório
+
+### 🆔 Microsoft Entra ID  
+Serviço de gerenciamento de identidade e acesso na nuvem, criado e mantido por você.  
+- **Autenticação**: valida credenciais dos usuários.  
+- **SSO (Single Sign-On)**: login único salva credenciais para múltiplos apps.  
+- **Gerenciamento de aplicativos e dispositivos**: controle centralizado de acesso.  
+- **B2B (Business-to-Business)**: convida identidades externas para acessar recursos da sua organização.  
+- **B2C (Business-to-Consumer)**: permite que usuários externos (Google, Facebook etc.) usem suas credenciais para acessar seu app.  
+- **Domínio Gerenciado**: sincroniza contas on-premises para Entra ID, mantendo réplicas dos usuários na nuvem.
+
+---
+
+## 🔑 Métodos de Autenticação & Autorização
+
+- **Autenticação**: processo de verificar “quem você é” (usuário/senha, certificado, token).  
+- **Autorização**: define “o que você pode fazer” dentro do sistema após autenticado.  
+- **MFA (Autenticação Multifator)**: combina “algo que você sabe” (senha) + “algo que você tem” (celular, token) para maior segurança.
+
+---
+
+## 🛡️ Modelos de Segurança
+
+- **Acesso Condicional**  
+  Usa atributos de usuário, dispositivo, localização, aplicativo e risco para permitir ou bloquear acessos em tempo real.
+
+- **RBAC (Role-Based Access Control)**  
+  Concede permissões mínimas necessárias com base nas funções atribuídas aos usuários.
+
+- **Zero Trust**  
+  Princípio “nunca confiar, sempre verificar”: todas as solicitações são autenticadas, autorizadas e criptografadas.
+
+- **Defesa em Profundidade**  
+  Abordagem em camadas de proteção:  
+  1. **Físico**: controle de acesso a datacenters, vigilância, biometria.  
+  2. **Identidade & Acesso**: gestão de identidades, SSO, MFA, políticas de senha.  
+  3. **Perímetro**: firewalls de borda, DDoS Protection, Web Application Firewall (WAF).  
+  4. **Rede**: Network Security Groups (NSGs), Azure Firewall, segmentação de sub-redes.  
+  5. **Computação**: hardening de sistemas operacionais, patches automáticos, antimalware.  
+  6. **Aplicativo**: Application Gateway, App Service Environment, análise de código e WAF de aplicação.  
+  7. **Dados**: criptografia em repouso e em trânsito, Azure Key Vault, classificação e DLP.
+
+- **Microsoft Defender para Nuvem**  
+  Monitoramento contínuo e proteção contra ameaças em VMs, containers e serviços na nuvem.  
+
 
