@@ -1,4 +1,4 @@
-# 🤖 Modelos de Linguagem Grandes (LLMs) e Azure AI
+# 🤖 Modelos de Linguagem Grandes (LLMs) e Azure AI 
 
 Descrevendo os conceitos de LLMs (Large Language Models), arquitetura Transformer, serviços Azure OpenAI e melhores práticas de IA generativa.
 
